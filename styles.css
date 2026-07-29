@@ -142,6 +142,13 @@
     cursor:pointer;
   }
   .nav-item svg{ width:18px; height:18px; min-width:18px; flex-shrink:0; }
+
+  /* Color distintivo para los íconos de contorno (los que no son logos a color) */
+  .nav-item[data-view="plantillas"] svg{ color:#F59E0B; }
+  .nav-item[data-view="personal"] svg{ color:#2DD4BF; }
+  .nav-item[data-view="actividades"] svg{ color:#F472B6; }
+  .nav-item[data-view="cumplimiento"] svg{ color:#818CF8; }
+  .nav-item[data-view="sitios"] svg{ color:#34D399; }
   .nav-item:hover{ background:var(--surface-2); color:var(--text); }
   .nav-item.active{ background:#3D7DFA; color:#fff; }
   .nav-item.active svg{ stroke:#fff; }
@@ -235,17 +242,35 @@
 
   .view{ display:none; padding:28px 32px 60px; }
   #view-inicio{
-    background: radial-gradient(ellipse 90% 80% at 50% 45%, rgba(34,229,255,0.10), rgba(34,229,255,0.02) 60%, transparent 75%);
+    background: transparent;
   }
   body.light #view-inicio{
-    background: radial-gradient(ellipse 90% 80% at 50% 45%, rgba(34,229,255,0.16), rgba(34,229,255,0.03) 60%, transparent 75%);
+    background: transparent;
   }
   /* Fondo oscuro en TODA la página de Inicio (barra superior incluida), no solo el mapa */
+  body.en-inicio{
+    background:#091b28;
+  }
+  body.en-inicio .main{
+    background:#091b28;
+    min-height:100vh;
+  }
+  body.en-inicio .topbar{
+    border-bottom-color:transparent;
+  }
+  body.en-inicio .topbar-title{
+    color:#ffffff;
+  }
+  /* Se mantienen también con :has() como refuerzo en navegadores que sí lo soportan */
+  body:has(#view-inicio.active){
+    background:#091b28;
+  }
   .main:has(#view-inicio.active){
-    background:radial-gradient(ellipse at center, #0d2c4d 0%, #071a30 55%, #030d19 100%);
+    background:#091b28;
+    min-height:100vh;
   }
   .main:has(#view-inicio.active) .topbar{
-    border-bottom-color:rgba(255,255,255,0.12);
+    border-bottom-color:transparent;
   }
   .main:has(#view-inicio.active) .topbar-title{
     color:#ffffff;
@@ -930,6 +955,30 @@
   .gps-sin-gestion .gps-dot{ background:#4FB8E8; }
 
   /* ============ CASOS ATENDIDOS ============ */
+  .pl-tab-proyecto{ font-size:13px; padding:8px 16px; }
+  .pl-tab-proyecto.active{ background:#3D7DFA; color:#fff; }
+  .pl-cronometro{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--text-dim);
+    letter-spacing:0.3px;
+  }
+  .pl-cronometro.pl-cron-rojo{
+    color:#DC2626;
+    animation:plCronPulso 1s ease-in-out infinite;
+  }
+  @keyframes plCronPulso{
+    0%,100%{ opacity:1; }
+    50%{ opacity:0.5; }
+  }
+
+  .badge{
+    display:inline-flex; align-items:center; gap:4px;
+    padding:3px 9px; border-radius:20px;
+    font-size:11.5px; font-weight:600;
+    white-space:nowrap;
+  }
   .caso-form-section{ margin-bottom:22px; }
   .caso-form-section:last-child{ margin-bottom:0; }
   .caso-section-title{
@@ -1169,7 +1218,13 @@
   /* Este fondo oscuro y el contorno transparente ahora aplican siempre en Inicio,
      no solo mientras se muestra el login */
   #inicioMapWrap{
-    background:radial-gradient(ellipse at center, #0d2c4d 0%, #071a30 55%, #030d19 100%) !important;
+    background:#091b28 !important;
+  }
+  /* Con sesión activa, el fondo ya lo pinta .main de forma continua;
+     si el mapa también pinta su propio degradado (calculado sobre su
+     propia caja, más chica) se nota una costura en los bordes. */
+  body.opk-sesion-activa #inicioMapWrap{
+    background:transparent !important;
   }
   #mapaBgSvg .depto-shape{
     fill:none !important;
@@ -1202,6 +1257,13 @@
     color:#fff; font-family:'Plus Jakarta Sans', sans-serif; font-weight:700; font-size:20px;
     margin:0 auto 18px;
     box-shadow:0 6px 18px rgba(10,106,153,0.4);
+  }
+  .login-logo-img{
+    display:block;
+    width:52px;
+    max-width:100%;
+    height:auto;
+    margin:0 auto 18px;
   }
   .login-title{ text-align:center; font-family:'Plus Jakarta Sans', sans-serif; font-weight:700; font-size:19px; margin-bottom:4px; }
   .login-sub{ text-align:center; color:var(--text-faint); font-size:13px; margin-bottom:26px; }
