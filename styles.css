@@ -1105,12 +1105,36 @@
   }
   .preview-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:14px; }
 
+  @media (max-width: 1100px){
+    .home-nav-grid{ grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); }
+    .inicio-toolbar{ flex-wrap:wrap; row-gap:10px; }
+  }
+
+  @media (max-width: 900px){
+    .login-overlay{ padding:16px; }
+    .login-card{ padding:28px 24px; }
+  }
+
   @media (max-width: 760px){
     .sidebar{ position:fixed; left:0; top:0; transform:translateX(0); }
     .sidebar.collapsed{ transform:translateX(-100%); width:var(--sidebar-w); min-width:var(--sidebar-w); }
     .form-grid, .view-grid{ grid-template-columns:1fr; }
     .topbar{ padding:16px 18px; }
     .view{ padding:18px 16px 50px; }
+  }
+
+  @media (max-width: 600px){
+    .topbar{ flex-wrap:wrap; row-gap:10px; }
+    .topbar-right{ flex-wrap:wrap; width:100%; }
+    .inicio-toolbar{ justify-content:flex-start; }
+    .inicio-toolbar .btn{ flex:1 1 auto; justify-content:center; }
+    .home-nav-grid{ grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:10px; }
+    .home-nav-card{ padding:14px 10px; }
+  }
+
+  @media (max-width: 480px){
+    .login-card{ padding:22px 18px; }
+    .login-btn{ width:100%; }
   }
   /* ============ MULTI-SELECT DE FILTROS ============ */
   select.ms-native{
